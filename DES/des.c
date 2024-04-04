@@ -1,9 +1,9 @@
 // source
 // https://en.wikipedia.org/wiki/Data_Encryption_Standard
-//
+// https://csrc.nist.gov/files/pubs/fips/46-3/final/docs/fips46-3.pdf
+// http://orion.towson.edu/~mzimand/cryptostuff/DES-tables.pdf
 
 #include <stdint.h>
-#include <stdio.h>
 #include <stdlib.h>
 
 int main(void){
@@ -68,10 +68,25 @@ static const int PC2[] = {
 	34, 53, 46, 42, 50, 36, 29, 32,
 };
 
-//
-//Takes in a 32 bit Halfblock and the subkey
-// returns the 
-char* des(char* message, uint64_t key){
+// FP or inverse initial permutation table
+static const int FP[] = {
+	40, 8, 48, 16, 56, 24, 64, 32,
+	39, 7, 47, 15, 55, 23, 63, 31,
+	38, 6, 46, 14, 54, 22, 62, 30,
+	37, 5, 45, 13, 53, 21, 61, 29,
+	36, 4, 44, 12, 52, 20, 60, 28,
+	35, 3, 43, 11, 51, 19, 59, 27,
+	34, 2, 42, 10, 50, 18, 58, 26,
+	33, 1, 41, 9, 49, 17, 57, 25
+};
+
+// expands the 32 bit input to a 48 bit
+// using the table E bit-selection table
+uint64_t expansion(uint32_t input){
+	
+}
+
+uint32_t substitution(uint64_t input){
 
 }
 
@@ -81,4 +96,9 @@ uint64_t permutation(uint64_t input, const int* table){
 		output |= ((input >> (64 - table[i])) & 1) << (55-i);
 	}
 	return  output;
+}
+
+uint64_t feistel(uint32_t R, uint64_t K){
+	uint64_t E48Bit = expansion(R);
+
 }
