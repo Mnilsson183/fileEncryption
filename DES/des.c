@@ -168,7 +168,7 @@ uint32_t substitution(uint64_t input){
 
 }
 
-uint64_t permutation(uint64_t input, const int* table){
+uint64_t permutation(uint64_t input, const uint32_t* table){
 	uint64_t output = 0;
 	for(short i = 0; i < 56; i++){
 		output |= ((input >> (64 - table[i])) & 1) << (55-i);
@@ -187,11 +187,10 @@ uint32_t binToDec(uint64_t input){
 }
 
 uint64_t decToBin(uint32_t dec){
-	
+		
 }
 
 uint8_t sTable(int table_number, int y, int x){
-
 	switch (table_number) {
 		case(0): return S1[y][x];
 		case(1): return S2[y][x];
@@ -226,5 +225,5 @@ uint64_t feistel(uint32_t r, uint64_t k){
 	uint64_t E_48Bit = expansion(r);
 	uint64_t xored_48Bit = E_48Bit ^ k;
 	uint64_t s_32Bit = feistelSubFunction(xored_48Bit);
-	return permutation(uint64_t input, const int *table);
+	return permutation(s_32Bit, &P_TABLE);
 }
